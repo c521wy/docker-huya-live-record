@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  huya-live-record:
+    build: .
+    image: c521wy/huya-live-record
+    volumes: 
+      - ./output:/data
