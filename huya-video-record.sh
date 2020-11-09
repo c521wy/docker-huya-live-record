@@ -17,8 +17,8 @@ do
             bd_url=$(echo "${urls}" | sed "s/\'/\"/g" | jq -r ".bd")
             ffmpeg \
               -user_agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36" \
-              -timeout 5000 \
               -i "${bd_url}" \
+              -timeout 5000 \
               -c copy "/data/$(date "+%Y%m%d%H%M%S")-video.ts"
         fi
     fi
