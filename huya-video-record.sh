@@ -37,7 +37,7 @@ function hls_download() {
             if ! echo "${last_m3u8_ts_file_list}" | grep -F ${m3u8_ts_file} >/dev/null; then
                 local stream_url="${m3u8_url_base}/${m3u8_ts_file}"
                 echo "downloading ${stream_url}"
-                curl -fsSL --max-time 10 ${stream_url} >> "${output}.ts"
+                curl -fsSL --max-time 10 ${stream_url} >> "${output}"
             fi
         done
 
