@@ -5,3 +5,5 @@ services:
     image: registry.cn-beijing.aliyuncs.com/c521wy/huya-live-record
     volumes: 
       - ./output:/data
+    environment:
+      HUYA_ROOM_ID: '11342398'

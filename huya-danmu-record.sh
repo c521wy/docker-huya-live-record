@@ -1,14 +1,24 @@
 #! /bin/sh
 
-set -x
-
 HUYA_ROOM_URL="https://www.huya.com/${HUYA_ROOM_ID}"
+
+CHECK_INTERVAL=300
 
 while true
 do
-    if ! ping -c 1 www.baidu.com || curl -fsSL "${HUYA_ROOM_URL}" | grep "上次开播" || curl -fsSL "${HUYA_ROOM_URL}" | grep "正在整改中"; then # 暂未开播
-        sleep 300
+    if ! ping -c 1 www.baidu.com; then
+        echo "网络不通"
+        sleep "${CHECK_INTERVAL}"
     else
-        python3 main2.py "${HUYA_ROOM_URL}" >> "/data/$(date "+%Y%m%d%H%M%S")-danmu.txt"
+        html=$(curl -fsSL "${HUYA_ROOM_URL}")
+        if echo "${html}" | grep -F "上次开播" >/dev/null; then
+            echo "未开播"
+            sleep "${CHECK_INTERVAL}"
+        elif echo "${html}" | grep -F "正在整改中" >/dev/null; then
+            echo "被踢下播"
+            sleep "${CHECK_INTERVAL}"
+        else
+            python3 main2.py "${HUYA_ROOM_URL}" >> "/data/$(date "+%Y%m%d%H%M%S")-danmu.txt"
+        fi
     fi
 done

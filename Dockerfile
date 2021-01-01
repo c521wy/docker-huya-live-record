@@ -1,7 +1,8 @@
 FROM alpine
 
 RUN \
-apk add --no-cache ffmpeg python3 python3-dev py3-pip musl-dev gcc jq supervisor tzdata curl && \
+sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+apk add --no-cache python3 python3-dev py3-pip musl-dev gcc jq supervisor tzdata curl && \
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
 pip3 install aiohttp protobuf pycryptodome
 
