@@ -37,7 +37,7 @@ function hls_download() {
             if ! echo "${last_m3u8_ts_file_list}" | grep -F ${m3u8_ts_file} >/dev/null; then
                 local stream_url="${m3u8_url_base}/${m3u8_ts_file}"
                 echo "downloading ${stream_url}"
-                curl -fsSL --max-time 10 ${stream_url} >> "${output}.ts" 2>&1
+                curl -fsSL --max-time 10 ${stream_url} >> "${output}.ts"
             fi
         done
 
@@ -51,7 +51,7 @@ function hls_download() {
 
 while true
 do
-    if ! ping -c 1 www.baidu.com; then
+    if ! ping -c 1 www.baidu.com >/dev/null; then
         echo "网络不通"
         sleep "${CHECK_INTERVAL}"
     else

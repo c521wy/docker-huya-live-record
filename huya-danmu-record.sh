@@ -6,7 +6,7 @@ CHECK_INTERVAL=300
 
 while true
 do
-    if ! ping -c 1 www.baidu.com; then
+    if ! ping -c 1 www.baidu.com >/dev/null; then
         echo "网络不通"
         sleep "${CHECK_INTERVAL}"
     else
