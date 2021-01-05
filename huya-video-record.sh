@@ -31,7 +31,7 @@ function hls_download() {
         local m3u8_ext_x_targetduration=$(echo "${m3u8_content}" | grep '#EXT-X-TARGETDURATION' | awk -F ':' '{print $2}')
         echo "m3u8_ext_x_targetduration=${m3u8_ext_x_targetduration}"
 
-        local m3u8_ts_file_list=$(echo "${m3u8_content}" | grep -v '#')
+        local m3u8_ts_file_list=$(echo "${m3u8_content}" | grep -v '#' | awk -F '?' '{print $1}')
 
         for m3u8_ts_file in ${m3u8_ts_file_list}; do
             if ! echo "${last_m3u8_ts_file_list}" | grep -F "${m3u8_ts_file}" >/dev/null; then
