@@ -44,8 +44,12 @@ function hls_download() {
         last_m3u8_ts_file_list="${m3u8_ts_file_list}"
         
         local end_date=$(date '+%s')
+
+        local time_to_sleep=$(( ${m3u8_ext_x_targetduration} - (${end_date} - ${start_date}) ))
+        if [[ "${time_to_sleep}" -gt "0" ]]; then
+            sleep ${time_to_sleep}
+        fi
         
-        sleep $(( ${m3u8_ext_x_targetduration} - (${end_date} - ${start_date}) ))
     done
 }
 
