@@ -49,7 +49,7 @@ function hls_download() {
         if [[ "${time_to_sleep}" -gt "0" ]]; then
             sleep ${time_to_sleep}
         fi
-        
+
     done
 }
 
@@ -73,6 +73,7 @@ do
                 sleep 10
             else
                 bd_url=$(echo "${urls}" | sed "s/\'/\"/g" | jq -r ".bd")
+                echo "开始录制 ${bd_url}"
                 hls_download "${bd_url}" "/data/$(date "+%Y%m%d%H%M%S")-video.ts"
             fi
         fi
